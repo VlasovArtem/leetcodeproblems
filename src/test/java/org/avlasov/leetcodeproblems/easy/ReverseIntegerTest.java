@@ -1,5 +1,6 @@
-package org.avlasov.leetcodeproblems;
+package org.avlasov.leetcodeproblems.easy;
 
+import org.avlasov.leetcodeproblems.easy.ReverseInteger;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

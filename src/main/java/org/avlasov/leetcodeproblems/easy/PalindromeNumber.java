@@ -1,4 +1,4 @@
-package org.avlasov.leetcodeproblems;
+package org.avlasov.leetcodeproblems.easy;
 
 /**
  * Created By artemvlasov on 21/06/2018

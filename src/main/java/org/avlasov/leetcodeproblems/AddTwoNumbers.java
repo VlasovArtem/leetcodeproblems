@@ -1,6 +1,6 @@
 package org.avlasov.leetcodeproblems;
 
-import java.util.Objects;
+import org.avlasov.leetcodeproblems.data.ListNode;
 
 /**
  * Created By artemvlasov on 20/06/2018
@@ -71,62 +71,4 @@ public class AddTwoNumbers {
         return resultNode;
     }
 
-    public class ListNode {
-
-        private int val;
-
-        private ListNode next;
-
-        public ListNode(int val) {
-            this.val = val;
-        }
-
-        public int getVal() {
-            return val;
-        }
-
-        public ListNode getNext() {
-            return next;
-        }
-
-        public void setVal(int val) {
-            this.val = val;
-        }
-
-        public void setNext(ListNode next) {
-            this.next = next;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof ListNode)) return false;
-            ListNode listNode = (ListNode) o;
-            return val == listNode.val &&
-                    Objects.equals(next, listNode.next);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(val, next);
-        }
-
-    }
-
-    public ListNode createListNode(int... data) {
-        if (data == null || data.length == 0) throw new IllegalArgumentException("Data is null or empty");
-        ListNode firstNode = null;
-        ListNode lastNode = null;
-        for (int datum : data) {
-            ListNode listNode = new ListNode(datum);
-            if (lastNode != null) {
-                lastNode.next = listNode;
-                lastNode = listNode;
-            } else {
-                firstNode = listNode;
-                lastNode = listNode;
-            }
-        }
-        return firstNode;
-    }
 }

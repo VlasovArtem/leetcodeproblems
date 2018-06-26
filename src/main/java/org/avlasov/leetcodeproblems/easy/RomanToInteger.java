@@ -1,4 +1,4 @@
-package org.avlasov.leetcodeproblems;
+package org.avlasov.leetcodeproblems.easy;
 
 import java.util.HashMap;
 import java.util.Map;
