@@ -5,7 +5,7 @@ import org.avlasov.leetcodeproblems.data.ListNode;
 /**
  * Created By artemvlasov on 26/06/2018
  **/
-public class ListNodeUtil {
+public class ListNodeUtils {
 
     public static ListNode createListNode(int... data) {
         if (data == null || data.length == 0) throw new IllegalArgumentException("Data is null or empty");
