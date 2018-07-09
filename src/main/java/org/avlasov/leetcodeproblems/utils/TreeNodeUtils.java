@@ -28,6 +28,17 @@ public class TreeNodeUtils {
         return treeNode;
     }
 
+    public static Optional<TreeNode> getTreeNode(List<Integer> values) {
+        return getTreeNode(values.toArray(new Integer[]{}));
+    }
+
+    public static Optional<TreeNode> getTreeNode(Integer[] values) {
+        if (values == null || values.length == 0) return Optional.empty();
+        TreeNode root = new TreeNode(values[0]);
+        addNodes(root, values, 1, 0, 1);
+        return Optional.of(root);
+    }
+
     public static void visualizeTreeNode(TreeNode treeNode) {
         if (treeNode == null) return;
         Map<Integer, List<Integer>> levelData = new TreeMap<>();
@@ -35,6 +46,30 @@ public class TreeNodeUtils {
         calculateLevelDataLeftTreeNode(treeNode.left, levelData, 2, 0);
         calculateLevelDataRightTreeNode(treeNode.right, levelData, 2, 0);
         drawLevelDataMap(levelData);
+    }
+
+    private static void addNodes(TreeNode node, Integer[] values, int prevIndex, int prevLevel, int index) {
+        int firstElementIndex = getFirstElementIndex(prevIndex, prevLevel, index);
+        if (node == null || firstElementIndex >= values.length) return;
+        node.left = getTreeNodeValue(values, firstElementIndex);
+        node.right = getTreeNodeValue(values, firstElementIndex + 1);
+        addNodes(node.left, values, prevIndex * 2 - 1, prevLevel + 1, firstElementIndex);
+        addNodes(node.right, values, prevIndex * 2, prevLevel + 1, firstElementIndex + 1);
+    }
+
+    private static int getFirstElementIndex(int prevIndex, int prevLevel, int index) {
+        if (prevLevel == 0) return 1;
+        int totalElementsOnPrevLevel = (int) Math.pow(2, prevLevel);
+        int leftElementsOnPrevLevel = totalElementsOnPrevLevel - prevIndex;
+        return index + leftElementsOnPrevLevel + (prevIndex * 2 - 1);
+    }
+
+    private static TreeNode getTreeNodeValue(Integer[] values, int index) {
+        if (index >= values.length) return null;
+        Integer value = values[index];
+        if (value == null)
+            return null;
+        return new TreeNode(value);
     }
 
     private static void calculateLevelDataLeftTreeNode(TreeNode left, Map<Integer,List<Integer>> levelData, int currentLevel, int prevGroupNum) {
@@ -107,11 +142,16 @@ public class TreeNodeUtils {
     }
 
     public static void main(String[] args) {
-        TreeNode treeNode = TreeNodeUtils.getTreeNode(1, 2, 5);
-        treeNode.right = TreeNodeUtils.getTreeNode(5, 6, 7);
-        treeNode.right.right = TreeNodeUtils.getTreeNode(7, 11, 9);
-        treeNode.right.left = TreeNodeUtils.getTreeNode(6, 12, 4);
-        visualizeTreeNode(treeNode);
+//*       5
+//*      / \
+//*     4   8
+//*    /   / \
+//*   11  13  4
+//*  /  \      \
+//* 7    2      1
+        Integer[] integers = {5, 4, 8, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23};
+        Optional<TreeNode> treeNode = TreeNodeUtils.getTreeNode(integers);
+        System.out.println("Test");
     }
 
 }
